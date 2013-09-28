@@ -1,6 +1,17 @@
-*.class
+# Ignore all dotfiles...
+.*
+# except for .gitignore
+!.gitignore
 
 # Package Files #
 *.jar
 *.war
 *.ear
+
+build
+*.iml
+*.ipr
+*.iws
+
+*.class
+

@@ -1,0 +1,3 @@
+function MenuCtrl($scope, $location) {
+
+}

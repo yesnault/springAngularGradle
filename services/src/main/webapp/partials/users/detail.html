@@ -1,0 +1,32 @@
+<form name="myForm" role="form" class="form-horizontal">
+    <h2>{{ title }}</h2>
+    <input class="form-control" type="hidden" name="firstname" ng-model="user.id">
+
+    <div class="form-group" ng-class="{error: myForm.firstname.$invalid}">
+        <label for="firstname" class="col-lg-2 control-label">Code</label>
+        <div class="col-lg-4">
+            <input class="form-control" type="text" id="firstname" name="firstname" ng-model="user.firstname" required>
+            <span ng-show="myForm.firstname.$error.required" class="help-inline">Required</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{error: myForm.nom.$invalid}">
+        <label for="nom" class="col-lg-2 control-label">Nom</label>
+        <div class="col-lg-4">
+            <input class="form-control" type="text" id="nom" name="nom" ng-model="user.nom" required>
+            <span ng-show="myForm.nom.$error.required" class="help-inline">Required</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <a href="#/users" class="btn btn-default">Annuler</a>
+            <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
+                    class="btn btn-primary">Save
+            </button>
+            <button ng-click="destroy()"
+                    ng-show="user.id > 0" class="btn btn-danger">Delete
+            </button>
+        </div>
+    </div>
+</form>
