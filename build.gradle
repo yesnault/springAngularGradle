@@ -61,12 +61,10 @@ project(':services') {
 
     war {
         baseName = 'sag-services'
-        version = '0.1.0'
     }
 
     jar {
         baseName = 'sag-services'
-        version = '0.1.0'
     }
 
     dependencies {
