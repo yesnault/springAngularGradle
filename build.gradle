@@ -3,18 +3,20 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven { url "http://repo.springsource.org/libs-snapshot" }
+        maven { url 'http://maven.tmatesoft.com/content/repositories/snapshots/' } // release plugin
     }
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M2'
         classpath 'com.eriwen:gradle-js-plugin:1.4.0'
+        classpath 'au.com.ish.gradle:release:2.2b1' // release plugin
     }
 }
 
 allprojects {
-    version = '1.0'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
     apply plugin: 'java'
+    apply plugin: 'release'
 
     group = 'com.yesnault.sag'
 }
@@ -23,6 +25,18 @@ compileJava {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 }
+
+release {
+    failOnSnapshotDependencies = true
+    allowLocalModifications = false
+    releaseDryRun = true
+    scm = 'git'
+    //scm = 'svn'
+    //username = 'fred'
+    //password = 'secret01'
+}
+version = release.projectVersion
+
 
 subprojects {
     repositories {
@@ -69,7 +83,45 @@ project(':services') {
             url 'http://repo.springsource.org/libs-milestone'
         }
     }
+
+    javascript.source {
+        app {
+            js {
+                srcDir "${projectDir}/src/main/webapp/js/app/"
+                include "**/*.js"
+            }
+        }
+    }
+
+    task jsApp(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
+        source = javascript.source.app.js.files
+        dest = file("${projectDir}/src/main/webapp/js/build/all-app.js")
+    }
+
+    task jsLibs(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
+        source = ["${projectDir}/src/main/webapp/js/libs/jquery-1.10.2.min.js",
+                "${projectDir}/src/main/webapp/js/libs/bootstrap.min.js",
+                "${projectDir}/src/main/webapp/js/libs/angular.min.js",
+                "${projectDir}/src/main/webapp/js/libs/angular-resource.min.js",
+                "${projectDir}/src/main/webapp/js/libs/angular-route.min.js"]
+        dest = file("${projectDir}/src/main/webapp/js/build/all-libs.js")
+    }
+
+    task minifyjs(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+        source = jsApp
+        dest = file("${projectDir}/src/main/webapp/js/build/all-app.min.js")
+    }
+
+    classes {
+        doFirst {
+            jsApp.execute()
+            jsLibs.execute()
+        }
+    }
 }
+
+
+
 
 project(':persistence') {
     dependencies {
