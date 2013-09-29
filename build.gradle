@@ -19,23 +19,23 @@ allprojects {
     apply plugin: 'release'
 
     group = 'com.yesnault.sag'
+
+    release {
+        failOnSnapshotDependencies = true
+        allowLocalModifications = false
+        releaseDryRun = true
+        scm = 'git'
+        //scm = 'svn'
+        //username = 'fred'
+        //password = 'secret01'
+    }
+    version = release.projectVersion
 }
 
 compileJava {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 }
-
-release {
-    failOnSnapshotDependencies = true
-    allowLocalModifications = false
-    releaseDryRun = true
-    scm = 'git'
-    //scm = 'svn'
-    //username = 'fred'
-    //password = 'secret01'
-}
-version = release.projectVersion
 
 
 subprojects {
