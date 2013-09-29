@@ -23,7 +23,7 @@ allprojects {
     release {
         failOnSnapshotDependencies = true
         allowLocalModifications = false
-        releaseDryRun = true
+        releaseDryRun = false
         scm = 'git'
         //scm = 'svn'
         //username = 'fred'
