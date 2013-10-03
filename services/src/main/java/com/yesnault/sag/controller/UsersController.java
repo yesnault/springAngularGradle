@@ -1,7 +1,7 @@
 package com.yesnault.sag.controller;
 
 import com.yesnault.sag.model.User;
-import com.yesnault.sag.model.UserRepository;
+import com.yesnault.sag.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
