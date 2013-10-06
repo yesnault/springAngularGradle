@@ -3,37 +3,41 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven { url "http://repo.springsource.org/libs-snapshot" }
-        maven { url 'http://maven.tmatesoft.com/content/repositories/snapshots/' } // release plugin
+        maven { url "http://maven.tmatesoft.com/content/repositories/snapshots/" } // release plugin
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M2'
-        classpath 'com.eriwen:gradle-js-plugin:1.4.0'
-        classpath 'au.com.ish.gradle:release:2.2b1' // release plugin
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M2"
+        classpath "com.eriwen:gradle-js-plugin:1.4.0"
+        classpath "au.com.ish.gradle:release:2.2b1" // release plugin
     }
 }
 
 allprojects {
-    apply plugin: 'eclipse'
-    apply plugin: 'idea'
-    apply plugin: 'java'
-    apply plugin: 'release'
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+    apply plugin: "java"
+    apply plugin: "release"
 
-    group = 'com.yesnault.sag'
+    group = "com.yesnault.sag"
 
     release {
         failOnSnapshotDependencies = true
         allowLocalModifications = false
         releaseDryRun = false
-        scm = 'git'
-        //scm = 'svn'
-        //username = 'fred'
-        //password = 'secret01'
+        scm = "git"
+        //scm = "svn"
+        //username = "fred"
+        //password = "secret01"
     }
     version = release.projectVersion
 
     dependencies {
         compile "org.slf4j:slf4j-api:1.7.5"
         compile "ch.qos.logback:logback-classic:1.0.13"
+    }
+
+    ext {
+        springVersion = "3.2.4.RELEASE"
     }
 }
 
@@ -42,22 +46,33 @@ compileJava {
     targetCompatibility = 1.7
 }
 
-
 subprojects {
     repositories {
+        mavenLocal()
         mavenCentral()
+        maven {
+            url "http://hudson.renn.fr.sopra:8081/nexus/content/groups/public/"
+            url "http://repo.springsource.org/libs-milestone"
+            url "http://repo.springsource.org/libs-snapshot"
+            url "https://repository.jboss.org/nexus/content/repositories/releases"
+            url "https://maven.alfresco.com/nexus/content/groups/public"
+        }
     }
     dependencies {
         testCompile "junit:junit:4.11"
+        compile "org.slf4j:slf4j-api:1.7.5"
+        compile "ch.qos.logback:logback-classic:1.0.13"
+        compile "ch.qos.logback:logback-core:1.0.13"
+        compile "org.fusesource.jansi:jansi:1.8"
     }
 }
 
-project(':services') {
-    apply plugin: 'spring-boot'
-    apply plugin: 'jetty'
-    apply plugin: 'js'
-    apply plugin: 'project-report'
-    apply plugin: 'war'
+project(":services") {
+    apply plugin: "spring-boot"
+    apply plugin: "jetty"
+    apply plugin: "js"
+    apply plugin: "project-report"
+    apply plugin: "war"
 
     jettyRun {
         reload = "automatic"
@@ -65,26 +80,19 @@ project(':services') {
     }
 
     war {
-        baseName = 'sag-services'
+        baseName = "sag-services"
     }
 
     jar {
-        baseName = 'sag-services'
+        baseName = "sag-services"
     }
 
     dependencies {
-        compile project(':business')
-        compile project(':persistence')
-        compile("org.springframework.boot:spring-boot-starter-web:0.5.0.M2")
-        compile 'org.springframework:spring-web:3.1.2.RELEASE'
-        compile 'org.springframework:spring-webmvc:3.1.2.RELEASE'
-
-    }
-
-    repositories {
-        maven {
-            url 'http://repo.springsource.org/libs-milestone'
-        }
+        compile project(":business")
+        compile project(":persistence")
+        compile "org.springframework.boot:spring-boot-starter-web:0.5.0.M2"
+        compile "org.springframework:spring-web:$springVersion"
+        compile "org.springframework:spring-webmvc:$springVersion"
     }
 
     javascript.source {
@@ -123,21 +131,16 @@ project(':services') {
     }
 }
 
-project(':persistence') {
+project(":persistence") {
     dependencies {
-        compile 'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final'
-        compile 'org.springframework:spring-core:3.1.2.RELEASE'
+        //compile "mysql:mysql-connector-java:5.1.26"
+        compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final"
+        compile "org.springframework:spring-context:$springVersion"
+        compile "org.springframework:spring-core:$springVersion"
 
-        compile("org.springframework:spring-orm:4.0.0.M3")
-        compile("org.springframework.data:spring-data-jpa:1.4.1.RELEASE")
-        compile("org.hibernate:hibernate-entitymanager:4.2.1.Final")
-        compile("com.h2database:h2:1.3.172")
-        testCompile("junit:junit:4.11")
+        compile "org.springframework:spring-orm:$springVersion"
+        compile "org.springframework.data:spring-data-jpa:1.4.1.RELEASE"
+        compile "org.hibernate:hibernate-entitymanager:4.2.1.Final"
+        compile "com.h2database:h2:1.3.172"
     }
-    repositories {
-        mavenCentral()
-        maven { url "http://repo.springsource.org/libs-snapshot" }
-        maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
-    }
-
 }
