@@ -1,6 +1,6 @@
 'use strict';
 
-protoApp.factory('User', function ($resource) {
+app.factory('User', function ($resource) {
     var User = $resource('rest/users/:userId',
         { userId: '@id'},
         {
@@ -24,7 +24,7 @@ protoApp.factory('User', function ($resource) {
     return User;
 });
 
-protoApp.factory("UsersService", function ($http) {
+app.factory("UsersService", function ($http) {
     return {
         findAll: function () {
             return $http.get('rest/users');

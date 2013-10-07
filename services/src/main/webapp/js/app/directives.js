@@ -1,11 +1,18 @@
-protoApp.directive('protoShowresults', function () {
+app.directive('appShowresults', function () {
     return {
         restrict: 'E',
         replace: true,
         templateUrl: "partials/common/showResults.html",
-        controller: function ($scope) {
+        scope: {
+            nbresults: '='
+        },
+        controller: function ($scope, $attrs) {
             $scope.choiceNbResults = [ 10, 50, 100, 1000, 10000 ];
-            $scope.nbResults = 50
+            if ($attrs.nbresults) {
+                $scope.nbResultsToDisplay = parseInt($attrs.nbresults);
+            } else {
+                $scope.nbResultsToDisplay = 50;
+            }
         }
     }
 });

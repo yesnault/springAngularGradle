@@ -3,11 +3,11 @@ package com.yesnault.sag.controller;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
+import com.yesnault.sag.model.User;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +38,13 @@ public class LogsController {
             loggers.add(new JsonLogger(logger));
         }
         return loggers;
+    }
+
+    @RequestMapping(value = "/logs/change/{loggerName}/{newLevel}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void changeLevel(@PathVariable String loggerName, @PathVariable String newLevel) {
+        LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+        context.getLogger(loggerName).setLevel(Level.valueOf(newLevel));
     }
 
 }

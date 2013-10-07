@@ -16,6 +16,7 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right" ng-show="showUser">
+        <li><a href="#/admin/logs"> <i class="icon-pencil icon-wrench"></i> Logs</a></li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">Firstname Lastname <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -30,7 +31,18 @@
 <div class="container" ng-view></div>
 
 <script src="js/build/all-libs.js"></script>
-<script src="js/build/all-app.js"></script>
+<!--<script src="js/build/all-app.js"></script>-->
+
+<script src="js/app/app.js"></script>
+<script src="js/app/controllers/homeController.js"></script>
+<script src="js/app/controllers/loginController.js"></script>
+<script src="js/app/controllers/menuController.js"></script>
+<script src="js/app/controllers/admin/usersController.js"></script>
+<script src="js/app/controllers/admin/logsController.js"></script>
+<script src="js/app/directives.js"></script>
+<script src="js/app/filters.js"></script>
+<script src="js/app/services/admin/users.js"></script>
+<script src="js/app/services/admin/logs.js"></script>
 
 </body>
 </html>
