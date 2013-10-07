@@ -1,7 +1,7 @@
 /* app.js */
 
 'use strict';
-var app = angular.module('protoApp', [ 'ngRoute', 'ngResource']);
+var app = angular.module('app', [ 'ngRoute', 'ngResource']);
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -11,9 +11,9 @@ app.config(function ($routeProvider) {
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })
 
-        .when('/users/', { controller: UsersCtrl, templateUrl: 'partials/admin/users/list.html'})
-        .when('/users/new/', {controller: UserNewCtrl, templateUrl: 'partials/admin/users/detail.html'})
-        .when('/users/:userId', {controller: UserEditCtrl, templateUrl: 'partials/admin/users/detail.html'})
+        .when('/admin/users/', { controller: UsersCtrl, templateUrl: 'partials/admin/users/list.html'})
+        .when('/admin/users/new/', {controller: UserNewCtrl, templateUrl: 'partials/admin/users/detail.html'})
+        .when('/admin/users/:userId', {controller: UserEditCtrl, templateUrl: 'partials/admin/users/detail.html'})
 
         .otherwise({
             redirectTo: '/login'

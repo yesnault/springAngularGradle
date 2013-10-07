@@ -2,6 +2,8 @@ package com.yesnault.sag.controller;
 
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Controller
 public class UsersController {
+
+    Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 
     @Autowired
     UserRepository userRepository;
@@ -31,6 +35,7 @@ public class UsersController {
     @RequestMapping(value = "/users/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void create(@RequestBody User user) {
+        LOGGER.debug("create new user");
         long id = user.getId();
         userRepository.save(user);
     }

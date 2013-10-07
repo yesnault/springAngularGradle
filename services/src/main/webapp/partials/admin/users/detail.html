@@ -3,18 +3,18 @@
     <input class="form-control" type="hidden" name="firstname" ng-model="user.id">
 
     <div class="form-group" ng-class="{error: myForm.firstname.$invalid}">
-        <label for="firstname" class="col-lg-2 control-label">Code</label>
+        <label for="firstname" class="col-lg-2 control-label">Firstname</label>
         <div class="col-lg-4">
             <input class="form-control" type="text" id="firstname" name="firstname" ng-model="user.firstname" required>
             <span ng-show="myForm.firstname.$error.required" class="help-inline">Required</span>
         </div>
     </div>
 
-    <div class="form-group" ng-class="{error: myForm.nom.$invalid}">
-        <label for="nom" class="col-lg-2 control-label">Nom</label>
+    <div class="form-group" ng-class="{error: myForm.lastname.$invalid}">
+        <label for="lastname" class="col-lg-2 control-label">Lastname</label>
         <div class="col-lg-4">
-            <input class="form-control" type="text" id="nom" name="nom" ng-model="user.nom" required>
-            <span ng-show="myForm.nom.$error.required" class="help-inline">Required</span>
+            <input class="form-control" type="text" id="lastname" name="lastname" ng-model="user.lastname" required>
+            <span ng-show="myForm.lastname.$error.required" class="help-inline">Required</span>
         </div>
     </div>
 

@@ -1,10 +1,10 @@
 <h2>Users</h2>
 
-<a class="btn btn-primary" href="#/users/new/{{groupLastname}}"><i class="icon-plus-sign"></i> Add a user</a>
+<a class="btn btn-primary" href="#/admin/users/new/{{groupLastname}}"><i class="icon-plus-sign"></i> Add a user</a>
 
 <p>There is {{ users.length }} users.</p>
 
-<proto-showresults></proto-showresults>
+<app-showresults></app-showresults>
 
 <table class="table table-striped table-bordered table-responsive">
     <thead>
@@ -18,6 +18,6 @@
     <tr ng-repeat="line in users | filter:filter | orderBy:predicate:reverse | limitTo:nbResults">
         <td>{{ line.firstname }}</td>
         <td>{{ line.lastname }}</td>
-        <td><a href="#/users/{{ line.id }}"><i class="icon-pencil"></i></a></td>
+        <td><a href="#/admin/users/{{ line.id }}"><i class="icon-pencil"></i></a></td>
     </tr>
 </table>

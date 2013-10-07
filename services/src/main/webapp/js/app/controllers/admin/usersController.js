@@ -25,13 +25,13 @@ function UserEditCtrl($scope, User, $routeParams, $location) {
 
     $scope.destroy = function () {
         self.original.destroy(function () {
-            $location.path('/users');
+            $location.path('/admin/users');
         });
     };
 
     $scope.save = function () {
         $scope.user.update(function () {
-            $location.path('/users');
+            $location.path('/admin/users');
         });
     };
 }
@@ -45,7 +45,7 @@ function UserNewCtrl($scope, User, $location) {
     $scope.save = function () {
         $scope.user.$save(
             function() {
-                $location.path('/users/')
+                $location.path('/admin/users/')
             }
         );
     }

@@ -1,7 +1,7 @@
 <!doctype html>
-<html ng-app="protoApp">
+<html ng-app="app">
 <head>
-    <title>Proto</title>
+    <title>App</title>
     <meta charset="utf-8">
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/font-awesome.min.css" rel="stylesheet"/>
@@ -16,6 +16,7 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right" ng-show="showUser">
+        <li><a href="#/admin/users"> <i class="icon-pencil icon-wrench"></i> Users</a></li>
         <li><a href="#/admin/logs"> <i class="icon-pencil icon-wrench"></i> Logs</a></li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">Firstname Lastname <b class="caret"></b></a>
