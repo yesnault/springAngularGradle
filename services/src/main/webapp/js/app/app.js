@@ -10,6 +10,7 @@ app.config(function ($routeProvider) {
 
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })
+        .when('/admin/metrics', {  controller: MetricsCtrl, templateUrl: 'partials/admin/metrics/metrics.html' })
 
         .when('/admin/users/', { controller: UsersCtrl, templateUrl: 'partials/admin/users/list.html'})
         .when('/admin/users/new/', {controller: UserNewCtrl, templateUrl: 'partials/admin/users/detail.html'})

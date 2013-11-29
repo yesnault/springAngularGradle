@@ -1,1 +1,1 @@
-include 'business', 'persistence', 'services'
+include 'business', 'infrastructure', 'persistence', 'services'

@@ -1,6 +1,8 @@
 Bootstrap with Spring, AngularJS and Gradle
 ==========
 
+Gradle version 1.8
+
 Run Jetty (usefull for dev) with ``` gradle jettyRun ```
 
 Build a war with ``` gradle build ```, war generated in services/build/
